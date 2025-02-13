@@ -1,0 +1,5 @@
+dispatch:
+  - url: "cg4f.site/*"
+    service: default
+  - url: "johnallen.live/*"
+    service: default

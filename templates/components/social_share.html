@@ -1,0 +1,52 @@
+<div class="social-share mt-4">
+    <h5>Share this:</h5>
+    <div class="d-flex gap-2">
+        <button onclick="shareOnTwitter()" class="btn btn-outline-primary">
+            <i class="bi bi-twitter"></i> Twitter
+        </button>
+        <button onclick="shareOnFacebook()" class="btn btn-outline-primary">
+            <i class="bi bi-facebook"></i> Facebook
+        </button>
+        <button onclick="shareOnLinkedIn()" class="btn btn-outline-primary">
+            <i class="bi bi-linkedin"></i> LinkedIn
+        </button>
+        <button onclick="copyLink()" class="btn btn-outline-primary">
+            <i class="bi bi-link-45deg"></i> Copy Link
+        </button>
+    </div>
+</div>
+
+<script>
+function shareOnTwitter() {
+    const text = document.title;
+    const url = window.location.href;
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+    trackSocialShare('twitter');
+}
+
+function shareOnFacebook() {
+    const url = window.location.href;
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+    trackSocialShare('facebook');
+}
+
+function shareOnLinkedIn() {
+    const url = window.location.href;
+    const title = document.title;
+    window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`, '_blank');
+    trackSocialShare('linkedin');
+}
+
+function copyLink() {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+        alert('Link copied to clipboard!');
+        trackSocialShare('copy_link');
+    });
+}
+
+function trackSocialShare(platform) {
+    gtag('event', 'social_share', {
+        'platform': platform,
+        'page': window.location.pathname
+    });
+}

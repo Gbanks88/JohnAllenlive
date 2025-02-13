@@ -1,0 +1,174 @@
+<div class="ai-assistant bg-white p-4 rounded shadow-sm mb-4">
+    <h4><i class="bi bi-robot"></i> AI Scholarship Assistant</h4>
+    
+    <!-- Essay Feedback -->
+    <div class="accordion" id="aiAssistant">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#essayFeedback">
+                    Essay Feedback
+                </button>
+            </h2>
+            <div id="essayFeedback" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    <form id="essayFeedbackForm" onsubmit="getEssayFeedback(event)">
+                        <div class="mb-3">
+                            <label for="essayText" class="form-label">Paste your essay here:</label>
+                            <textarea class="form-control" id="essayText" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Get Feedback</button>
+                    </form>
+                    <div id="essayFeedbackResult" class="mt-3 d-none">
+                        <h5>Feedback:</h5>
+                        <div class="feedback-content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Essay Outline Generator -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#outlineGenerator">
+                    Essay Outline Generator
+                </button>
+            </h2>
+            <div id="outlineGenerator" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    <form id="outlineForm" onsubmit="generateOutline(event)">
+                        <div class="mb-3">
+                            <label for="promptText" class="form-label">Essay Prompt:</label>
+                            <textarea class="form-control" id="promptText" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="background" class="form-label">Your Background:</label>
+                            <textarea class="form-control" id="background" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Generate Outline</button>
+                    </form>
+                    <div id="outlineResult" class="mt-3 d-none">
+                        <h5>Your Outline:</h5>
+                        <div class="outline-content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personalized Recommendations -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#personalizedSearch">
+                    Personalized Recommendations
+                </button>
+            </h2>
+            <div id="personalizedSearch" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    <form id="profileForm" onsubmit="getPersonalizedRecommendations(event)">
+                        <div class="mb-3">
+                            <label for="major" class="form-label">Intended Major:</label>
+                            <input type="text" class="form-control" id="major" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="interests" class="form-label">Interests & Activities:</label>
+                            <textarea class="form-control" id="interests" rows="2" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="achievements" class="form-label">Key Achievements:</label>
+                            <textarea class="form-control" id="achievements" rows="2" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Get Recommendations</button>
+                    </form>
+                    <div id="recommendationsResult" class="mt-3 d-none">
+                        <h5>Personalized Recommendations:</h5>
+                        <div class="recommendations-content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+async function getEssayFeedback(event) {
+    event.preventDefault();
+    const essayText = document.getElementById('essayText').value;
+    const resultDiv = document.getElementById('essayFeedbackResult');
+    const contentDiv = resultDiv.querySelector('.feedback-content');
+    
+    try {
+        const response = await fetch('/api/ai/essay-feedback', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ essay: essayText })
+        });
+        
+        const data = await response.json();
+        if (data.feedback) {
+            contentDiv.innerHTML = data.feedback.replace(/\n/g, '<br>');
+            resultDiv.classList.remove('d-none');
+        }
+    } catch (error) {
+        alert('Error getting feedback. Please try again.');
+    }
+}
+
+async function generateOutline(event) {
+    event.preventDefault();
+    const promptText = document.getElementById('promptText').value;
+    const background = document.getElementById('background').value;
+    const resultDiv = document.getElementById('outlineResult');
+    const contentDiv = resultDiv.querySelector('.outline-content');
+    
+    try {
+        const response = await fetch('/api/ai/essay-outline', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+                prompt: promptText,
+                background: background
+            })
+        });
+        
+        const data = await response.json();
+        if (data.outline) {
+            contentDiv.innerHTML = data.outline.replace(/\n/g, '<br>');
+            resultDiv.classList.remove('d-none');
+        }
+    } catch (error) {
+        alert('Error generating outline. Please try again.');
+    }
+}
+
+async function getPersonalizedRecommendations(event) {
+    event.preventDefault();
+    const profile = {
+        major: document.getElementById('major').value,
+        interests: document.getElementById('interests').value,
+        achievements: document.getElementById('achievements').value
+    };
+    const resultDiv = document.getElementById('recommendationsResult');
+    const contentDiv = resultDiv.querySelector('.recommendations-content');
+    
+    try {
+        const response = await fetch('/api/ai/personalize-search', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ profile })
+        });
+        
+        const data = await response.json();
+        if (data.recommendations) {
+            contentDiv.innerHTML = data.recommendations.replace(/\n/g, '<br>');
+            resultDiv.classList.remove('d-none');
+        }
+    } catch (error) {
+        alert('Error getting recommendations. Please try again.');
+    }
+}
+</script>

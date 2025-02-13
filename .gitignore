@@ -1,6 +1,9 @@
 # Dependencies
 node_modules/
+venv/
 .venv/
+__pycache__/
+*.pyc
 
 # Build output
 dist/
@@ -19,10 +22,11 @@ build/
 *.log
 npm-debug.log*
 
-# Environment variables
+# Environment variables and databases
 .env
 .env.local
 .env.*.local
+*.db
 
 # Credentials
 config/credentials.env

@@ -1,0 +1,18 @@
+runtime: python39
+entrypoint: gunicorn -b :$PORT app:app
+
+env_variables:
+  GOOGLE_CLOUD_PROJECT: "scholarship-search-engine"
+  DB_SOCKET_DIR: "/cloudsql"
+  
+instance_class: F1
+
+automatic_scaling:
+  target_cpu_utilization: 0.65
+  min_instances: 1
+  max_instances: 10
+
+handlers:
+- url: /.*
+  script: auto
+  secure: always
