@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Allow: /scholarship-tips
+Allow: /application-guide
+Allow: /resources
+Allow: /blog
+
+Disallow: /api/
+Disallow: /admin/
+
+Sitemap: https://YOUR_DOMAIN/sitemap.xml
