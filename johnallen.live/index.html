@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JOHN ALLEN'S | Luxury Professional Attire</title>
+    <title>JOHN ALLEN'S | Professional & Innovation Hub</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
@@ -16,11 +17,17 @@
         <div class="nav-content">
             <div class="logo">JA</div>
             <div class="nav-links">
-                <a href="#collections">Collections</a>
-                <a href="#mens">Men's</a>
-                <a href="#womens">Women's</a>
-                <a href="#accessories">Accessories</a>
-                <a href="#boutiques">Boutiques</a>
+                <a href="#professional">Professional</a>
+                <a href="#innovation">Innovation</a>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Services</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="stream-ad-exchange.html">Ad Exchange</a></li>
+                        <li><a href="stock-trading.html">Stock Trading</a></li>
+                        <li><a href="housekeeping.html">Housekeeping</a></li>
+                        <li><a href="learning-platform.html">Learning Platform</a></li>
+                    </ul>
+                </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle">Virtual Experience</a>
                     <ul class="dropdown-menu">
@@ -28,10 +35,12 @@
                         <li><a href="virtual-tryon.html">Virtual Try-On</a></li>
                     </ul>
                 </li>
+                <a href="#ai-tools">AI Tools</a>
             </div>
             <div class="nav-actions">
                 <button class="search-toggle"><i class="fas fa-search"></i></button>
-                <button class="cart-toggle"><i class="fas fa-shopping-bag"></i><span class="cart-count">0</span></button>
+                <button class="notifications-toggle"><i class="fas fa-bell"></i><span class="notification-count">0</span></button>
+                <button class="profile-toggle"><i class="fas fa-user"></i></button>
                 <button class="theme-toggle" id="themeToggle">
                     <i class="fas fa-moon"></i>
                 </button>
@@ -43,170 +52,90 @@
     <section id="hero" class="hero">
         <div class="hero-content">
             <h1 class="brand-name" data-text="JOHN ALLEN'S">JOHN ALLEN'S</h1>
-            <p class="tagline">Elevating Professional Excellence</p>
+            <p class="tagline">Innovation Meets Excellence</p>
             <div class="cta-buttons">
-                <a href="#collections" class="btn primary">Shop Latest Collection</a>
-                <a href="#boutiques" class="btn secondary">Find a Boutique</a>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="mouse"></div>
-            <span>Discover More</span>
-        </div>
-    </section>
-
-    <!-- Collections Section -->
-    <section id="collections" class="collections">
-        <h2>Featured Collections</h2>
-        <div class="collection-grid">
-            <div class="collection-card executive">
-                <h3>Executive Collection</h3>
-                <p>Refined suits and formal wear for the distinguished professional</p>
-                <a href="#executive" class="btn outline">Explore</a>
-            </div>
-            <div class="collection-card casual">
-                <h3>Smart Casual</h3>
-                <p>Elegant polo shirts and premium denim for refined leisure</p>
-                <a href="#casual" class="btn outline">Explore</a>
-            </div>
-            <div class="collection-card accessories">
-                <h3>Luxury Accessories</h3>
-                <p>Sophisticated handbags and premium leather goods</p>
-                <a href="#accessories" class="btn outline">Explore</a>
+                <a href="#services" class="btn primary">Explore Services</a>
+                <a href="#ai-tools" class="btn secondary">Try AI Tools</a>
             </div>
         </div>
     </section>
 
-    <!-- Men's Section -->
-    <section id="mens" class="category-section">
-        <h2>Men's Collection</h2>
-        <div class="category-grid">
-            <div class="category-item">
-                <img src="images/suits.jpg" alt="Premium Suits">
-                <h3>Suits & Blazers</h3>
-                <p>Masterfully tailored suits for the modern executive</p>
+    <!-- Services Grid -->
+    <section id="services" class="services-grid">
+        <h2>Our Services</h2>
+        <div class="grid-container">
+            <!-- StreamAdExchange -->
+            <div class="service-card" data-service="adexchange">
+                <i class="fas fa-ad"></i>
+                <h3>Stream Ad Exchange</h3>
+                <p>Optimize your advertising revenue with our intelligent ad exchange platform</p>
+                <a href="stream-ad-exchange.html" class="btn">Launch Platform</a>
             </div>
-            <div class="category-item">
-                <img src="images/polos.jpg" alt="Designer Polos">
-                <h3>Luxury Polos</h3>
-                <p>Refined casual wear for the discerning gentleman</p>
+
+            <!-- StockTradingTool -->
+            <div class="service-card" data-service="trading">
+                <i class="fas fa-chart-line"></i>
+                <h3>Stock Trading Tool</h3>
+                <p>Advanced stock trading with AI-powered insights and analytics</p>
+                <a href="stock-trading.html" class="btn">Start Trading</a>
             </div>
-            <div class="category-item">
-                <img src="images/shoes.jpg" alt="Premium Footwear">
-                <h3>Premium Footwear</h3>
-                <p>Handcrafted shoes for unmatched sophistication</p>
+
+            <!-- Housekeeping App -->
+            <div class="service-card" data-service="housekeeping">
+                <i class="fas fa-home"></i>
+                <h3>Housekeeping Services</h3>
+                <p>Efficient home management and cleaning service scheduling</p>
+                <a href="housekeeping.html" class="btn">Book Service</a>
+            </div>
+
+            <!-- Learning Platform -->
+            <div class="service-card" data-service="learning">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>Learning Platform</h3>
+                <p>Interactive courses and professional development resources</p>
+                <a href="learning-platform.html" class="btn">Start Learning</a>
             </div>
         </div>
     </section>
 
-    <!-- Women's Section -->
-    <section id="womens" class="category-section">
-        <h2>Women's Collection</h2>
-        <div class="category-grid">
-            <div class="category-item">
-                <img src="images/womens-suits.jpg" alt="Women's Suits">
-                <h3>Professional Attire</h3>
-                <p>Elegantly tailored suits and blazers for the modern executive</p>
+    <!-- AI Tools Section -->
+    <section id="ai-tools" class="ai-tools">
+        <h2>AI-Powered Tools</h2>
+        <div class="tools-container">
+            <div class="tool-card">
+                <i class="fas fa-robot"></i>
+                <h3>Virtual Assistant</h3>
+                <p>Your personal AI assistant for task management</p>
             </div>
-            <div class="category-item">
-                <img src="images/handbags.jpg" alt="Designer Handbags">
-                <h3>Luxury Handbags</h3>
-                <p>Sophisticated purses for the distinguished professional</p>
+            <div class="tool-card">
+                <i class="fas fa-brain"></i>
+                <h3>Smart Analytics</h3>
+                <p>Data-driven insights for better decision making</p>
             </div>
-            <div class="category-item">
-                <img src="images/accessories.jpg" alt="Premium Accessories">
-                <h3>Accessories</h3>
-                <p>Curated accessories for the perfect finishing touch</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Signature Style Section -->
-    <section id="signature" class="signature">
-        <h2>The John Allen's Signature</h2>
-        <div class="signature-content">
-            <div class="signature-item">
-                <i class="fas fa-gem"></i>
-                <h3>Premium Quality</h3>
-                <p>Finest materials and exceptional craftsmanship</p>
-            </div>
-            <div class="signature-item">
-                <i class="fas fa-cut"></i>
-                <h3>Perfect Fit</h3>
-                <p>Tailored to perfection for every body type</p>
-            </div>
-            <div class="signature-item">
-                <i class="fas fa-crown"></i>
-                <h3>Timeless Elegance</h3>
-                <p>Classic designs that transcend trends</p>
+            <div class="tool-card">
+                <i class="fas fa-magic"></i>
+                <h3>Content Generator</h3>
+                <p>AI-powered content creation tools</p>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features">
-        <div class="container">
-            <h2>Experience Fashion Like Never Before</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <i class="fas fa-lightbulb"></i>
-                    <h3>Holographic Display</h3>
-                    <p>View our collection in stunning 3D with our smart holographic bulb technology.</p>
-                    <a href="holographic.html" class="btn secondary">Learn More</a>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-camera"></i>
-                    <h3>Virtual Try-On</h3>
-                    <p>Try on clothes virtually using your device's camera with AI-powered fitting.</p>
-                    <a href="virtual-tryon.html" class="btn secondary">Try Now</a>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-tshirt"></i>
-                    <h3>Premium Collections</h3>
-                    <p>Explore our curated collection of luxury professional and casual wear.</p>
-                    <a href="apparel.html" class="btn secondary">View Collection</a>
-                </div>
+    <!-- User Dashboard -->
+    <section id="dashboard" class="dashboard">
+        <h2>Your Dashboard</h2>
+        <div class="dashboard-widgets">
+            <div class="widget" id="recentActivity">
+                <h3>Recent Activity</h3>
+                <div class="activity-feed"></div>
             </div>
-        </div>
-    </section>
-
-    <!-- Boutiques Section -->
-    <section id="boutiques" class="boutiques">
-        <h2>Our Boutiques</h2>
-        <div class="boutique-grid">
-            <div class="boutique-card">
-                <img src="images/boutique-ny.jpg" alt="New York Boutique">
-                <h3>New York</h3>
-                <p>Fifth Avenue Flagship Store</p>
-                <a href="#book-appointment" class="btn secondary">Book Appointment</a>
+            <div class="widget" id="quickActions">
+                <h3>Quick Actions</h3>
+                <div class="actions-list"></div>
             </div>
-            <div class="boutique-card">
-                <img src="images/boutique-la.jpg" alt="Los Angeles Boutique">
-                <h3>Los Angeles</h3>
-                <p>Rodeo Drive Location</p>
-                <a href="#book-appointment" class="btn secondary">Book Appointment</a>
+            <div class="widget" id="insights">
+                <h3>Insights</h3>
+                <div class="insights-content"></div>
             </div>
-            <div class="boutique-card">
-                <img src="images/boutique-miami.jpg" alt="Miami Boutique">
-                <h3>Miami</h3>
-                <p>Design District Store</p>
-                <a href="#book-appointment" class="btn secondary">Book Appointment</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter Section -->
-    <section id="newsletter" class="newsletter">
-        <div class="newsletter-content">
-            <h2>Join the John Allen's Circle</h2>
-            <p>Be the first to receive exclusive updates and private collection previews</p>
-            <form id="newsletterForm" class="newsletter-form">
-                <div class="form-group">
-                    <input type="email" id="newsletter-email" required>
-                    <label for="newsletter-email">Email Address</label>
-                </div>
-                <button type="submit" class="btn primary">Subscribe</button>
-            </form>
         </div>
     </section>
 
@@ -216,36 +145,35 @@
             <div class="footer-logo">JOHN ALLEN'S</div>
             <div class="footer-links">
                 <div class="footer-column">
-                    <h4>Collections</h4>
-                    <a href="#mens">Men's</a>
-                    <a href="#womens">Women's</a>
-                    <a href="#accessories">Accessories</a>
+                    <h4>Services</h4>
+                    <a href="stream-ad-exchange.html">Ad Exchange</a>
+                    <a href="stock-trading.html">Stock Trading</a>
+                    <a href="housekeeping.html">Housekeeping</a>
+                    <a href="learning-platform.html">Learning Platform</a>
                 </div>
                 <div class="footer-column">
-                    <h4>Customer Care</h4>
+                    <h4>Tools</h4>
+                    <a href="#ai-tools">AI Tools</a>
+                    <a href="analytics.html">Analytics</a>
+                    <a href="virtual-tryon.html">Virtual Try-On</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <a href="#help">Help Center</a>
                     <a href="#contact">Contact Us</a>
-                    <a href="#sizing">Sizing Guide</a>
-                    <a href="#shipping">Shipping & Returns</a>
-                </div>
-                <div class="footer-column">
-                    <h4>About</h4>
-                    <a href="#story">Our Story</a>
-                    <a href="#craftsmanship">Craftsmanship</a>
-                    <a href="#sustainability">Sustainability</a>
+                    <a href="#docs">Documentation</a>
                 </div>
             </div>
-            <div class="social-links">
-                <a href="#instagram" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="#facebook" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="#twitter" target="_blank"><i class="fab fa-twitter"></i></a>
-            </div>
-            <p class="copyright">&copy; 2025 JOHN ALLEN'S. All rights reserved.</p>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 John Allen's. All rights reserved.</p>
         </div>
     </footer>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/main.js"></script>
-    <script src="js/animations.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/ai-integration.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
