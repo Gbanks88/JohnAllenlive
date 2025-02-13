@@ -1,0 +1,284 @@
+/* Timeline animations */
+.timeline-item {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-item:nth-child(even) {
+    transform: translateX(50px);
+}
+
+.timeline-item.animate {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.timeline-particle {
+    position: absolute;
+    width: var(--particle-size);
+    height: var(--particle-size);
+    background: var(--particle-color);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: timelineParticle 1s ease-out forwards;
+}
+
+@keyframes timelineParticle {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--particle-travel), var(--particle-travel)) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Team card animations */
+.team-member {
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+}
+
+.energy-field {
+    position: absolute;
+    inset: -20px;
+    border-radius: inherit;
+    background: radial-gradient(
+        circle at var(--x, 50%) var(--y, 50%),
+        rgba(0, 247, 255, 0.2) 0%,
+        transparent 50%
+    );
+    opacity: 0;
+    animation: energyPulse 2s ease-in-out infinite;
+}
+
+@keyframes energyPulse {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+/* Contact form animations */
+.input-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--space-primary);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: inputParticle 1s ease-out forwards;
+}
+
+@keyframes inputParticle {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x, 50px), var(--y, -50px)) scale(0);
+        opacity: 0;
+    }
+}
+
+.success-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--aurora-green);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: successParticle 1s ease-out forwards;
+}
+
+@keyframes successParticle {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: 
+            translate(
+                calc(cos(var(--angle)) * var(--velocity) * 50px),
+                calc(sin(var(--angle)) * var(--velocity) * 50px)
+            )
+            scale(0);
+        opacity: 0;
+    }
+}
+
+/* Floating particles */
+.particle-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.floating-particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--space-primary);
+    border-radius: 50%;
+    animation: floatParticle var(--fall-duration) linear var(--fall-delay) infinite;
+}
+
+@keyframes floatParticle {
+    0% {
+        transform: translateY(0) scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(calc(-1 * var(--fall-distance))) scale(1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(calc(-2 * var(--fall-distance))) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Scroll reveal animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Enhanced hover effects */
+.hover-glow {
+    position: relative;
+    overflow: hidden;
+}
+
+.hover-glow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.2) 50%,
+        transparent 100%
+    );
+    transform: skewX(-15deg);
+    transition: transform 0.5s ease;
+}
+
+.hover-glow:hover::before {
+    transform: translateX(50%) skewX(-15deg);
+}
+
+/* Parallax effects */
+.parallax {
+    transform: translateZ(0);
+    transition: transform 0.1s linear;
+    will-change: transform;
+}
+
+/* Loading animation */
+.space-loader {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top-color: var(--space-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Typing effect */
+[data-type]::after {
+    content: '|';
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Enhanced transitions */
+.fade-enter {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.fade-exit {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-exit-active {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+/* Holographic effects */
+.holographic {
+    position: relative;
+    overflow: hidden;
+}
+
+.holographic::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        45deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 100%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+}
+
+.holographic:hover::before {
+    transform: translateX(100%);
+}
+
+/* Energy field effects */
+.energy-pulse {
+    position: relative;
+}
+
+.energy-pulse::after {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border: 2px solid var(--space-primary);
+    border-radius: inherit;
+    animation: pulse 2s ease-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}

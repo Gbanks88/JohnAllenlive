@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CG4F Analytics Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #7b2fff;
+            --secondary-color: #ff124f;
+            --background-color: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --text-color: #ffffff;
+            --border-color: #2a2a2a;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--background-color);
+            color: var(--text-color);
+        }
+        
+        .dashboard {
+            padding: 2rem;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .title {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .date-range {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .date-input {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .metric-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .metric-title {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-change {
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .positive-change {
+            color: #4caf50;
+        }
+        
+        .negative-change {
+            color: #f44336;
+        }
+        
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .chart-container {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .chart-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .export-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        
+        .export-button:hover {
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard {
+                padding: 1rem;
+            }
+            
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <h1 class="title">Analytics Dashboard</h1>
+            <div class="date-range">
+                <input type="date" class="date-input" id="start-date">
+                <input type="date" class="date-input" id="end-date">
+                <button class="export-button" onclick="exportData()">
+                    <i class="fas fa-download"></i> Export
+                </button>
+            </div>
+        </div>
+        
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-title">Total Visits</div>
+                <div class="metric-value" id="total-visits">0</div>
+                <div class="metric-change positive-change">
+                    <i class="fas fa-arrow-up"></i>
+                    <span id="visits-change">0%</span>
+                </div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-title">Search Queries</div>
+                <div class="metric-value" id="search-queries">0</div>
+                <div class="metric-change positive-change">
+                    <i class="fas fa-arrow-up"></i>
+                    <span id="queries-change">0%</span>
+                </div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-title">Conversion Rate</div>
+                <div class="metric-value" id="conversion-rate">0%</div>
+                <div class="metric-change negative-change">
+                    <i class="fas fa-arrow-down"></i>
+                    <span id="conversion-change">0%</span>
+                </div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-title">Revenue</div>
+                <div class="metric-value" id="revenue">$0.00</div>
+                <div class="metric-change positive-change">
+                    <i class="fas fa-arrow-up"></i>
+                    <span id="revenue-change">0%</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="charts-grid">
+            <div class="chart-container">
+                <h2 class="chart-title">Revenue Trend</h2>
+                <canvas id="revenue-chart"></canvas>
+            </div>
+            
+            <div class="chart-container">
+                <h2 class="chart-title">Search Activity</h2>
+                <canvas id="search-chart"></canvas>
+            </div>
+            
+            <div class="chart-container">
+                <h2 class="chart-title">User Engagement</h2>
+                <canvas id="engagement-chart"></canvas>
+            </div>
+            
+            <div class="chart-container">
+                <h2 class="chart-title">Conversion Funnel</h2>
+                <canvas id="funnel-chart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Initialize date inputs
+        const today = new Date();
+        const thirtyDaysAgo = new Date(today - 30 * 24 * 60 * 60 * 1000);
+        
+        document.getElementById('start-date').value = thirtyDaysAgo.toISOString().split('T')[0];
+        document.getElementById('end-date').value = today.toISOString().split('T')[0];
+        
+        // Fetch and display analytics data
+        async function fetchAnalytics() {
+            try {
+                const response = await fetch('/api/analytics/summary');
+                const data = await response.json();
+                
+                updateMetrics(data.summary);
+                updateCharts(data.trends);
+            } catch (error) {
+                console.error('Failed to fetch analytics:', error);
+            }
+        }
+        
+        function updateMetrics(summary) {
+            document.getElementById('total-visits').textContent = 
+                Math.round(summary.avgDailyVisits * 30);
+            document.getElementById('search-queries').textContent = 
+                Math.round(summary.avgDailyVisits * 2); // Assuming 2 searches per visit
+            document.getElementById('conversion-rate').textContent = 
+                (summary.avgConversionRate * 100).toFixed(1) + '%';
+            document.getElementById('revenue').textContent = 
+                '$' + summary.totalRevenue.toFixed(2);
+        }
+        
+        function updateCharts(trends) {
+            // Revenue Chart
+            new Chart(document.getElementById('revenue-chart'), {
+                type: 'line',
+                data: {
+                    labels: trends.map(t => new Date(t.timestamp).toLocaleDateString()),
+                    datasets: [{
+                        label: 'Revenue',
+                        data: trends.map(t => t.revenue),
+                        borderColor: '#7b2fff',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+            
+            // Search Activity Chart
+            new Chart(document.getElementById('search-chart'), {
+                type: 'bar',
+                data: {
+                    labels: trends.map(t => new Date(t.timestamp).toLocaleDateString()),
+                    datasets: [{
+                        label: 'Searches',
+                        data: trends.map(t => t.searches),
+                        backgroundColor: '#ff124f'
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+            
+            // More charts can be added here
+        }
+        
+        async function exportData() {
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+            
+            try {
+                const response = await fetch(
+                    `/api/analytics/export?start=${startDate}&end=${endDate}`
+                );
+                const data = await response.json();
+                
+                // Create CSV
+                const csv = convertToCSV(data);
+                
+                // Download
+                const blob = new Blob([csv], { type: 'text/csv' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `analytics_${startDate}_to_${endDate}.csv`;
+                a.click();
+            } catch (error) {
+                console.error('Failed to export data:', error);
+            }
+        }
+        
+        function convertToCSV(data) {
+            const headers = Object.keys(data[0]);
+            const rows = data.map(row => 
+                headers.map(header => JSON.stringify(row[header])).join(',')
+            );
+            
+            return [
+                headers.join(','),
+                ...rows
+            ].join('\n');
+        }
+        
+        // Initial load
+        fetchAnalytics();
+        
+        // Refresh every 5 minutes
+        setInterval(fetchAnalytics, 300000);
+    </script>
+</body>
+</html>

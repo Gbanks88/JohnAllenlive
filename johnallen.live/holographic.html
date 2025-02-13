@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Allen's - Holographic Experience</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <header>
+        <!-- Navigation code here -->
+    </header>
+
+    <main>
+        <section class="holographic-hero">
+            <div class="container">
+                <h1>Experience Fashion in Holographic Reality</h1>
+                <p>Transform your space into a personal fashion showroom with our revolutionary smart bulb technology.</p>
+            </div>
+        </section>
+
+        <section class="holographic-features">
+            <div class="container">
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>Smart Bulb Technology</h3>
+                        <p>Our proprietary smart bulb creates a stunning holographic display, bringing fashion to life in your space.</p>
+                        <button class="btn purchase-bulb">Purchase Smart Bulb ($199)</button>
+                    </div>
+
+                    <div class="feature-card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Mobile Control</h3>
+                        <p>Control your holographic display from your smartphone with our intuitive app.</p>
+                        <a href="#" class="btn download-app">Download App</a>
+                    </div>
+
+                    <div class="feature-card">
+                        <i class="fas fa-tshirt"></i>
+                        <h3>Virtual Wardrobe</h3>
+                        <p>Access our entire collection in holographic form, viewing clothes from every angle.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="setup-guide">
+            <div class="container">
+                <h2>Easy Setup Process</h2>
+                <div class="setup-steps">
+                    <div class="step">
+                        <span class="step-number">1</span>
+                        <h4>Install the Bulb</h4>
+                        <p>Replace any standard E27 bulb with our smart holographic bulb.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <h4>Connect to WiFi</h4>
+                        <p>Use our app to connect the bulb to your home network.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <h4>Start Exploring</h4>
+                        <p>Browse our collection and see clothes come to life in your space.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="technical-specs">
+            <div class="container">
+                <h2>Technical Specifications</h2>
+                <div class="specs-grid">
+                    <div class="spec">
+                        <h4>Bulb Type</h4>
+                        <p>E27 Smart LED</p>
+                    </div>
+                    <div class="spec">
+                        <h4>Power</h4>
+                        <p>15W</p>
+                    </div>
+                    <div class="spec">
+                        <h4>Connectivity</h4>
+                        <p>WiFi 6</p>
+                    </div>
+                    <div class="spec">
+                        <h4>Projection Range</h4>
+                        <p>2-4 meters</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Initialize Three.js scene for holographic preview
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        
+        function initHolographicPreview() {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.querySelector('.holographic-preview').appendChild(renderer.domElement);
+            
+            // Add holographic effect
+            const geometry = new THREE.SphereGeometry(1, 32, 32);
+            const material = new THREE.MeshPhongMaterial({
+                color: 0xffffff,
+                transparent: true,
+                opacity: 0.5
+            });
+            const hologram = new THREE.Mesh(geometry, material);
+            scene.add(hologram);
+            
+            camera.position.z = 5;
+            
+            // Add lighting
+            const light = new THREE.PointLight(0xffffff, 1, 100);
+            light.position.set(0, 0, 10);
+            scene.add(light);
+            
+            animate();
+        }
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+        
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initHolographicPreview);
+    </script>
+</body>
+</html>

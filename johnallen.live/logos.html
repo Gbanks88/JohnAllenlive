@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Allen's - Logo Designs</title>
+    <link rel="stylesheet" href="css/logos.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <div class="logo-grid">
+        <!-- Classic Cursive -->
+        <div class="logo-card">
+            <div class="logo-classic">John Allen's</div>
+            <div class="subtitle">CLASSIC CURSIVE</div>
+        </div>
+
+        <!-- Elegant Monogram -->
+        <div class="logo-card">
+            <div class="logo-monogram">JA</div>
+            <div class="subtitle">ELEGANT MONOGRAM</div>
+        </div>
+
+        <!-- Modern Minimal -->
+        <div class="logo-card">
+            <div class="logo-minimal">JOHN<br>ALLEN</div>
+            <div class="subtitle">MODERN MINIMAL</div>
+        </div>
+
+        <!-- 3D Interactive -->
+        <div class="logo-card">
+            <div class="logo-3d">
+                <div class="logo-3d-inner">
+                    <div class="logo-face front">JA</div>
+                    <div class="logo-face back">John Allen's</div>
+                </div>
+            </div>
+            <div class="subtitle">3D INTERACTIVE</div>
+        </div>
+
+        <!-- Luxury Variant -->
+        <div class="logo-card">
+            <div class="logo-luxury animate-gradient">JOHN ALLEN</div>
+            <div class="subtitle">LUXURY VARIANT</div>
+        </div>
+    </div>
+
+    <script>
+        // 3D Logo Interaction
+        document.querySelector('.logo-3d').addEventListener('mouseenter', function() {
+            this.querySelector('.logo-3d-inner').style.transform = 'rotateY(180deg)';
+        });
+
+        document.querySelector('.logo-3d').addEventListener('mouseleave', function() {
+            this.querySelector('.logo-3d-inner').style.transform = 'rotateY(0)';
+        });
+
+        // Add hover effects for all logo cards
+        document.querySelectorAll('.logo-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Initialize Three.js scene for 3D logo
+        function init3DLogo() {
+            const container = document.createElement('div');
+            container.style.position = 'absolute';
+            container.style.top = '0';
+            container.style.left = '0';
+            container.style.width = '100%';
+            container.style.height = '100%';
+            document.querySelector('.logo-3d').appendChild(container);
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
+            
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            container.appendChild(renderer.domElement);
+
+            // Create text geometry
+            const textGeometry = new THREE.TextGeometry('JA', {
+                font: new THREE.Font(),
+                size: 50,
+                height: 10,
+                curveSegments: 12,
+                bevelEnabled: true,
+                bevelThickness: 1,
+                bevelSize: 1,
+                bevelOffset: 0,
+                bevelSegments: 5
+            });
+
+            const material = new THREE.MeshPhongMaterial({ color: 0x1a1a1a });
+            const textMesh = new THREE.Mesh(textGeometry, material);
+            
+            scene.add(textMesh);
+            camera.position.z = 100;
+
+            // Add lights
+            const light = new THREE.DirectionalLight(0xffffff, 1);
+            light.position.set(0, 0, 1);
+            scene.add(light);
+
+            // Animation
+            function animate() {
+                requestAnimationFrame(animate);
+                textMesh.rotation.y += 0.01;
+                renderer.render(scene, camera);
+            }
+            animate();
+        }
+
+        // Load Three.js when ready
+        window.addEventListener('load', init3DLogo);
+    </script>
+</body>
+</html>

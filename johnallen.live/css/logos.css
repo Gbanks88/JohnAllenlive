@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Great+Vibes&family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;600&display=swap');
+
+.logo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo-card {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.logo-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Classic Cursive Logo */
+.logo-classic {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 4rem;
+    color: #1a1a1a;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    margin: 0;
+}
+
+/* Elegant Monogram */
+.logo-monogram {
+    font-family: 'Great Vibes', cursive;
+    font-size: 6rem;
+    background: linear-gradient(45deg, #1a1a1a, #4a4a4a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+}
+
+/* Modern Minimal */
+.logo-minimal {
+    font-family: 'Cinzel', serif;
+    font-size: 3rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+/* 3D Interactive Logo */
+.logo-3d {
+    position: relative;
+    perspective: 1000px;
+    height: 200px;
+}
+
+.logo-3d-inner {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+}
+
+.logo-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+    background: white;
+    border: 2px solid #eee;
+    border-radius: 8px;
+}
+
+.logo-face.back {
+    transform: rotateY(180deg);
+    background: linear-gradient(45deg, #1a1a1a, #333);
+    color: white;
+}
+
+/* Luxury Variant */
+.logo-luxury {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    background: linear-gradient(45deg, #c5a572, #e0c080);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 1rem;
+}
+
+/* Animation Classes */
+.animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 8s ease infinite;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .logo-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 1rem;
+    }
+    
+    .logo-classic, .logo-monogram {
+        font-size: 3rem;
+    }
+    
+    .logo-minimal {
+        font-size: 2rem;
+    }
+    
+    .logo-3d {
+        height: 150px;
+    }
+}

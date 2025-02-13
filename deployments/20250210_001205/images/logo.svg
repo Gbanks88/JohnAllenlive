@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        .logo-text { fill: #ffffff; font-family: 'Space Grotesk', sans-serif; font-weight: bold; }
+        .highlight { fill: #7b2fff; }
+    </style>
+    <text x="10" y="30" class="logo-text" font-size="32">CG4</text>
+    <text x="70" y="30" class="logo-text highlight" font-size="32">F</text>
+</svg>

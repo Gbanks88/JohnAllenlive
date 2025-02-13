@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% PAGE_TITLE %} - Connecting Global</title>
+    <link rel="stylesheet" href="css/space-theme.css">
+    <link rel="stylesheet" href="css/transitions.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    {% EXTRA_STYLES %}
+</head>
+<body>
+    <!-- Star Field Background -->
+    <div class="star-field" id="starField"></div>
+    
+    <!-- Holographic Grid -->
+    <div class="hologram-grid"></div>
+
+    <!-- Header -->
+    <header class="space-header">
+        <div class="container">
+            <nav class="nav-container">
+                <a href="transition.html?to=index.html" class="logo">
+                    <i class="fas fa-globe nav-logo-icon"></i>
+                    Connecting Global
+                </a>
+                <div class="nav-links">
+                    <a href="transition.html?to=about.html" class="nav-btn"><i class="fas fa-info-circle"></i> About</a>
+                    <a href="transition.html?to=fair-innovation.html" class="nav-btn"><i class="fas fa-lightbulb"></i> Fair Innovation</a>
+                    <a href="transition.html?to=ai-tools.html" class="nav-btn"><i class="fas fa-robot"></i> AI Tools</a>
+                    <a href="transition.html?to=learn-ai.html" class="nav-btn"><i class="fas fa-graduation-cap"></i> Learn AI</a>
+                    <a href="transition.html?to=make-money.html" class="nav-btn"><i class="fas fa-dollar-sign"></i> Make Money</a>
+                    <a href="transition.html?to=patent.html" class="nav-btn"><i class="fas fa-certificate"></i> Patents</a>
+                    <a href="transition.html?to=apparel.html" class="nav-btn"><i class="fas fa-tshirt"></i> Apparel</a>
+                    <a href="transition.html?to=subscriptions.html" class="nav-btn"><i class="fas fa-tags"></i> Pricing</a>
+                    <a href="transition.html?to=analytics.html" class="nav-btn"><i class="fas fa-chart-line"></i> Analytics</a>
+                    <a href="#contact" class="btn cta-btn"><i class="fas fa-envelope"></i> Contact Us</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        {% MAIN_CONTENT %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="transition.html?to=about.html">About Us</a></li>
+                        <li><a href="transition.html?to=fair-innovation.html">Fair Innovation</a></li>
+                        <li><a href="transition.html?to=patent.html">Patents</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="transition.html?to=ai-tools.html">AI Tools</a></li>
+                        <li><a href="transition.html?to=learn-ai.html">Learn AI</a></li>
+                        <li><a href="transition.html?to=make-money.html">Make Money</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Shop & Analytics</h4>
+                    <ul class="footer-links">
+                        <li><a href="transition.html?to=apparel.html">Apparel</a></li>
+                        <li><a href="transition.html?to=subscriptions.html">Pricing</a></li>
+                        <li><a href="transition.html?to=analytics.html">Analytics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul class="footer-links social-links">
+                        <li><a href="https://twitter.com/ConnectingGlob4" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="https://www.linkedin.com/company/connecting-global-4-future" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                        <li><a href="mailto:info@connecting-global.com"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Connecting Global 4 Future. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/transitions.js"></script>
+    <script src="js/animations.js"></script>
+    {% EXTRA_SCRIPTS %}
+</body>
+</html>

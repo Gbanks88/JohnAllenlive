@@ -1,0 +1,34 @@
+{
+    "region": "us-south",
+    "resource_group": "default",
+    "services": {
+        "object_storage": {
+            "plan": "standard",
+            "name": "johnallen-live-backup"
+        },
+        "watson": {
+            "assistant": {
+                "plan": "lite",
+                "name": "johnallen-live-assistant"
+            },
+            "speech_to_text": {
+                "plan": "lite",
+                "name": "johnallen-live-speech"
+            }
+        },
+        "functions": {
+            "namespace": "johnallen-live-functions"
+        },
+        "kubernetes": {
+            "cluster_name": "johnallen-live-cluster",
+            "worker_count": 3,
+            "machine_type": "b3c.4x16"
+        },
+        "databases": {
+            "mongodb": {
+                "plan": "standard",
+                "name": "johnallen-live-mongodb"
+            }
+        }
+    }
+}

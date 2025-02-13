@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tools - CG4F</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/space-theme.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="space-background"></div>
+    <div class="stars"></div>
+    <div class="hologram-grid"></div>
+    
+    <header class="main-header">
+        <!-- Navigation will be inserted here by navigation.js -->
+    </header>
+
+    <main class="main-content">
+        <section class="hero-section">
+            <h1>AI Tools & Resources</h1>
+            <p>Discover our collection of powerful AI tools and resources to enhance your capabilities.</p>
+        </section>
+
+        <section class="feature-section">
+            <div class="feature-card">
+                <div class="glow-effect"></div>
+                <h3>AI Code Assistant</h3>
+                <p>Get help with coding tasks using our advanced AI code completion and suggestion tool.</p>
+            </div>
+            <div class="feature-card">
+                <div class="glow-effect"></div>
+                <h3>AI Text Generator</h3>
+                <p>Create high-quality content with our AI-powered text generation tool.</p>
+            </div>
+            <div class="feature-card">
+                <div class="glow-effect"></div>
+                <h3>AI Image Analysis</h3>
+                <p>Analyze and process images using state-of-the-art computer vision algorithms.</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/navigation.js"></script>
+    <script>
+        // Create dynamic star field
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            const numberOfStars = 100;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.setProperty('--duration', `${Math.random() * 3 + 1}s`);
+                starsContainer.appendChild(star);
+            }
+        }
+
+        createStars();
+
+        // Handle feature card hover effects
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                
+                const glowEffect = card.querySelector('.glow-effect');
+                glowEffect.style.setProperty('--x', x + '%');
+                glowEffect.style.setProperty('--y', y + '%');
+            });
+        });
+    </script>
+</body>
+</html>

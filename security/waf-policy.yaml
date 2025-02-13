@@ -1,0 +1,37 @@
+name: johnallens-fashion-security-policy
+description: "Security policy for John Allen's Fashion website"
+rules:
+  - action: deny(403)
+    description: "Block SQL injection attempts"
+    priority: 1000
+    match:
+      expr:
+        evaluatePreconfiguredExpr: xss
+  - action: deny(403)
+    description: "Block XSS attempts"
+    priority: 2000
+    match:
+      expr:
+        evaluatePreconfiguredExpr: sqli
+  - action: deny(403)
+    description: "Rate limiting"
+    priority: 3000
+    match:
+      expr:
+        rateLimitOptions:
+          enforceOnKey: "IP"
+          rate: 100
+          intervalSec: 60
+  - action: deny(403)
+    description: "Block suspicious file uploads"
+    priority: 4000
+    match:
+      expr:
+        regexMatch:
+          regex: ".*\\.(php|jsp|asp|aspx|exe|dll|bat|cmd|sh)$"
+  - action: allow
+    description: "Default rule to allow all other traffic"
+    priority: 2147483647
+    match:
+      expr:
+        true: {}

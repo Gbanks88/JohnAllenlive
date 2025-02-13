@@ -1,0 +1,11 @@
+kind: compute#urlMap
+name: johnallen-live-urlmap
+defaultService: global/backendBuckets/johnallen-live-backend
+hostRules:
+- hosts:
+  - johnallen.live
+  - www.johnallen.live
+  pathMatcher: main
+pathMatchers:
+- name: main
+  defaultService: global/backendBuckets/johnallen-live-backend

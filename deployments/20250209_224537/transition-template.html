@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading... - Connecting Global</title>
+    <link rel="stylesheet" href="css/space-theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .transition-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--bg-color);
+            z-index: 1000;
+        }
+
+        .loading-animation {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        .planet {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 50px var(--primary-color);
+        }
+
+        .orbit {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: orbit 2s linear infinite;
+        }
+
+        .satellite {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px var(--accent-color);
+        }
+
+        @keyframes orbit {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-text {
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            color: var(--text-color);
+            text-align: center;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="transition-container">
+        <div class="loading-animation">
+            <div class="planet"></div>
+            <div class="orbit">
+                <div class="satellite"></div>
+            </div>
+        </div>
+        <div class="loading-text">
+            <h2>Connecting to Innovation...</h2>
+            <p>Please wait while we prepare your experience</p>
+        </div>
+    </div>
+
+    <script>
+        // Redirect after animation
+        setTimeout(() => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const destination = urlParams.get('to') || 'index.html';
+            window.location.href = destination;
+        }, 2000);
+    </script>
+</body>
+</html>

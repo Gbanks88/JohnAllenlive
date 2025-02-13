@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patent Services - Connecting Global</title>
+    <link rel="stylesheet" href="css/space-theme.css">
+    <link rel="stylesheet" href="css/transitions.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .patent-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .patent-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .patent-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: var(--neon-glow);
+        }
+
+        .patent-status {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .status-pending {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+
+        .status-granted {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+        }
+
+        .patent-timeline {
+            position: relative;
+            margin: 4rem 0;
+            padding-left: 2rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+            padding-left: 2rem;
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.5rem;
+            top: 0;
+            width: 1rem;
+            height: 1rem;
+            background: var(--primary-color);
+            border-radius: 50%;
+            box-shadow: var(--neon-glow);
+        }
+
+        .timeline-date {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .search-patent {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: var(--neon-glow);
+        }
+    </style>
+</head>
+<body>
+    <!-- Star Field Background -->
+    <div class="star-field" id="starField"></div>
+    
+    <!-- Holographic Grid -->
+    <div class="hologram-grid"></div>
+
+    <!-- Header -->
+    <header class="space-header">
+        <div class="container">
+            <nav class="nav-container">
+                <a href="transition.html?to=index.html" class="logo">
+                    <i class="fas fa-globe nav-logo-icon"></i>
+                    Connecting Global
+                </a>
+                <div class="nav-links">
+                    <a href="transition.html?to=about.html" class="nav-btn"><i class="fas fa-info-circle"></i> About</a>
+                    <a href="transition.html?to=fair-innovation.html" class="nav-btn"><i class="fas fa-lightbulb"></i> Fair Innovation</a>
+                    <a href="transition.html?to=ai-tools.html" class="nav-btn"><i class="fas fa-robot"></i> AI Tools</a>
+                    <a href="transition.html?to=learn-ai.html" class="nav-btn"><i class="fas fa-graduation-cap"></i> Learn AI</a>
+                    <a href="transition.html?to=make-money.html" class="nav-btn"><i class="fas fa-dollar-sign"></i> Make Money</a>
+                    <a href="transition.html?to=patent.html" class="nav-btn active"><i class="fas fa-certificate"></i> Patents</a>
+                    <a href="transition.html?to=apparel.html" class="nav-btn"><i class="fas fa-tshirt"></i> Apparel</a>
+                    <a href="transition.html?to=subscriptions.html" class="nav-btn"><i class="fas fa-tags"></i> Pricing</a>
+                    <a href="transition.html?to=analytics.html" class="nav-btn"><i class="fas fa-chart-line"></i> Analytics</a>
+                    <a href="#contact" class="btn cta-btn"><i class="fas fa-envelope"></i> Contact Us</a>
+                </div>
+            </nav>
+
+            <div class="hero">
+                <h1 class="hero-title fade-in">Patent Services</h1>
+                <p class="hero-subtitle fade-in">Protect your innovations with our comprehensive patent management system</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Search Section -->
+        <section class="search-patent fade-in">
+            <h2>Search Patents</h2>
+            <input type="text" class="search-input" placeholder="Search patents by keyword, inventor, or ID...">
+            <button class="btn">Search</button>
+        </section>
+
+        <!-- Patent Grid -->
+        <section class="patent-grid">
+            <div class="patent-card fade-in">
+                <span class="patent-status status-granted">Granted</span>
+                <h3>AI-Powered Innovation Platform</h3>
+                <p>Patent ID: CG2025-001</p>
+                <p>A system for connecting global innovators using artificial intelligence.</p>
+            </div>
+
+            <div class="patent-card fade-in">
+                <span class="patent-status status-pending">Pending</span>
+                <h3>Neural Network Collaboration System</h3>
+                <p>Patent ID: CG2025-002</p>
+                <p>Advanced neural network system for facilitating global collaboration.</p>
+            </div>
+
+            <div class="patent-card fade-in">
+                <span class="patent-status status-granted">Granted</span>
+                <h3>Blockchain Patent Verification</h3>
+                <p>Patent ID: CG2025-003</p>
+                <p>Decentralized system for patent verification and management.</p>
+            </div>
+        </section>
+
+        <!-- Patent Process Timeline -->
+        <section class="patent-timeline">
+            <h2>Patent Process</h2>
+            
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">Step 1: Initial Consultation</div>
+                <p>Meet with our patent experts to discuss your innovation and determine patentability.</p>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">Step 2: Patent Search</div>
+                <p>Comprehensive search to ensure your innovation is unique and patentable.</p>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">Step 3: Application Preparation</div>
+                <p>Our experts prepare detailed patent applications with technical drawings and claims.</p>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">Step 4: Filing and Prosecution</div>
+                <p>File your patent application and handle all communication with patent offices.</p>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">Step 5: Grant and Maintenance</div>
+                <p>Obtain your patent grant and maintain it throughout its lifecycle.</p>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2>Ready to Protect Your Innovation?</h2>
+            <p>Get started with our patent services today</p>
+            <a href="#contact" class="btn">Contact Our Patent Team</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#press">Press</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#guides">Patent Guides</a></li>
+                        <li><a href="#webinars">Webinars</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms of Service</a></li>
+                        <li><a href="#security">Security</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="#twitter"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#linkedin"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                        <li><a href="#github"><i class="fab fa-github"></i> GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/transitions.js"></script>
+    <script src="js/animations.js"></script>
+    <script>
+        // Star Field Animation
+        function createStarField() {
+            const starField = document.getElementById('starField');
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.width = `${Math.random() * 3}px`;
+                star.style.height = star.style.width;
+                star.style.animationDuration = `${Math.random() * 3 + 1}s`;
+                star.style.animationDelay = `${Math.random() * 3}s`;
+                starField.appendChild(star);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createStarField();
+
+            // Intersection Observer for Fade-in Animation
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                    });
+                },
+                { threshold: 0.1 }
+            );
+
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>

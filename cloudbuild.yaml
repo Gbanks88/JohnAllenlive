@@ -1,0 +1,122 @@
+steps:
+  # Install dependencies
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['install']
+    dir: 'johnallen.live'
+
+  # Run build process (optimize images and minify assets)
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['run', 'build']
+    dir: 'johnallen.live'
+
+  # Run tests (if any)
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['test']
+    dir: 'johnallen.live'
+
+  # Deploy Vision AI Service
+  - name: 'gcr.io/cloud-builders/gcloud'
+    dir: 'cloud-functions/vision-service'
+    args:
+      - functions
+      - deploy
+      - analyze-image
+      - --runtime=python311
+      - --trigger-http
+      - --allow-unauthenticated
+      - --region=us-central1
+      - --memory=512MB
+      - --entry-point=analyze_image
+
+  # Create dist directory if it doesn't exist
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        mkdir -p johnallen.live/dist
+        cp -r johnallen.live/css johnallen.live/dist/
+        cp -r johnallen.live/js johnallen.live/dist/
+        cp -r johnallen.live/images johnallen.live/dist/
+        cp johnallen.live/*.html johnallen.live/dist/
+
+  # Optimize images using Vision AI
+  - name: 'gcr.io/cloud-builders/python'
+    entrypoint: 'python'
+    args:
+      - '-c'
+      - |
+        from google.cloud import vision
+        from google.cloud import storage
+        import os
+
+        def optimize_image(bucket_name, blob_name):
+            vision_client = vision.ImageAnnotatorClient()
+            storage_client = storage.Client()
+            bucket = storage_client.bucket(bucket_name)
+            blob = bucket.blob(blob_name)
+
+            image = vision.Image()
+            image.source.image_uri = f"gs://{bucket_name}/{blob_name}"
+
+            response = vision_client.label_detection(image=image)
+            labels = response.label_annotations
+
+            # Add metadata to image
+            metadata = {
+                'labels': ','.join([label.description for label in labels]),
+                'Cache-Control': 'public,max-age=31536000'
+            }
+            blob.metadata = metadata
+            blob.patch()
+
+        bucket_name = f"johnallen.live-{os.environ['PROJECT_ID']}"
+        for root, _, files in os.walk('johnallen.live/dist/images'):
+            for file in files:
+                if file.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')):
+                    blob_path = os.path.join(root, file).replace('johnallen.live/dist/', '')
+                    optimize_image(bucket_name, blob_path)
+
+  # Deploy to Cloud Storage
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['-m', 'rsync', '-r', '-d', './johnallen.live/dist', 'gs://johnallen.live-${PROJECT_ID}']
+
+  # Set Cache-Control headers
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['-m', 'setmeta', '-h', 'Cache-Control:public,max-age=3600', 'gs://johnallen.live-${PROJECT_ID}/**/*.html']
+  
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['-m', 'setmeta', '-h', 'Cache-Control:public,max-age=31536000', 'gs://johnallen.live-${PROJECT_ID}/**/*.{css,js,png,jpg,jpeg,svg,webp}']
+
+  # Set security headers
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud compute backend-buckets update connecting-global-backend \
+          --gcs-bucket-name=johnallen.live-${PROJECT_ID} \
+          --enable-cdn \
+          --custom-response-header="Strict-Transport-Security:max-age=31536000; includeSubDomains; preload" \
+          --custom-response-header="X-Frame-Options:SAMEORIGIN" \
+          --custom-response-header="X-Content-Type-Options:nosniff" \
+          --custom-response-header="Content-Security-Policy:default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; frame-ancestors 'self'" \
+          --custom-response-header="Referrer-Policy:strict-origin-when-cross-origin"
+
+  # Invalidate CDN cache
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - compute
+      - url-maps
+      - invalidate-cdn-cache
+      - connecting-global-lb
+      - --path=/*
+
+timeout: '1800s'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+substitutions:
+  _REGION: us-central1
+  _DOMAIN: connecting-global.com

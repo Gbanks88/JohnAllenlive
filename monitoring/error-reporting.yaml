@@ -1,0 +1,57 @@
+service: johnallens-fashion
+version: v1
+
+error_reporting:
+  enabled: true
+  ignore_errors:
+    - pattern: "^404 Not Found"
+      reason: "Expected for missing files"
+    - pattern: "^/_ah/health"
+      reason: "Health check endpoints"
+
+notification_channels:
+  - type: email
+    email: johnallens80sbaby@gmail.com
+  - type: slack
+    webhook_url: ${SLACK_WEBHOOK_URL}
+
+alert_policies:
+  - name: "Critical Errors"
+    conditions:
+      - type: error_count
+        threshold: 10
+        period: 1h
+    notification_channels:
+      - email
+      - slack
+
+  - name: "Performance Degradation"
+    conditions:
+      - type: latency
+        threshold: 2000  # 2 seconds
+        period: 5m
+    notification_channels:
+      - email
+
+monitoring_metrics:
+  - name: request_count
+    type: counter
+    description: "Number of requests"
+    labels:
+      - path
+      - method
+      - status_code
+
+  - name: response_time
+    type: distribution
+    description: "Response time in milliseconds"
+    labels:
+      - path
+      - method
+
+  - name: error_count
+    type: counter
+    description: "Number of errors"
+    labels:
+      - error_type
+      - path

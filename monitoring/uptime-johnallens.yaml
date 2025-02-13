@@ -1,0 +1,20 @@
+displayName: "John Allen's Fashion Website Monitoring"
+httpCheck:
+  useSsl: true
+  validateSsl: true
+  path: "/"
+  port: 443
+monitoredResource:
+  type: "uptime_url"
+  labels:
+    project_id: "cool-ascent-450601-d1"
+    host: "johnallens.live"
+period: "60s"
+timeout: "10s"
+contentMatchers:
+  - matcher: CONTAINS_STRING
+    content: "John Allen's"
+selectedRegions:
+  - "USA_IOWA"
+  - "USA_VIRGINIA"
+  - "EUROPE_WEST1"

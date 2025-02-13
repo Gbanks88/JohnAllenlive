@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CG4F Apparel - Connecting Global 4 Future LLC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/space-theme.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .apparel-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .collection-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(22, 33, 62, 0.5);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .collection-header h1 {
+            color: #fff;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .collection-header p {
+            color: #4a9eff;
+            font-size: 1.2rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: rgba(26, 26, 46, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-image {
+            position: relative;
+            padding-top: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+        }
+
+        .product-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            color: #fff;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .product-description {
+            color: #ccc;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .product-price {
+            color: #4a9eff;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .size-selector {
+            flex: 1;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .size-selector option {
+            background: #1a1a2e;
+            color: #fff;
+        }
+
+        .add-to-cart {
+            flex: 2;
+            padding: 0.8rem;
+            background: #4a9eff;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: #66b3ff;
+        }
+
+        .category-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .category-filter {
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-filter:hover,
+        .category-filter.active {
+            background: #4a9eff;
+            border-color: #4a9eff;
+        }
+
+        .collection-banner {
+            margin-bottom: 3rem;
+            padding: 3rem;
+            background: linear-gradient(45deg, rgba(74, 158, 255, 0.2), rgba(22, 33, 62, 0.2));
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .collection-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('path-to-your-pattern.png');
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .collection-banner h2 {
+            color: #fff;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .collection-banner p {
+            color: #ccc;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="space-background"></div>
+    <div class="stars"></div>
+    <div class="hologram-grid"></div>
+    
+    <header class="main-header">
+        <nav class="nav">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="images/cg4f-logo.png" alt="CG4F Logo">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="apparel.html" class="active">Apparel</a>
+                <a href="patent.html">Patent</a>
+                <a href="subscriptions.html">Subscriptions</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="apparel-container">
+        <div class="collection-header">
+            <h1>CG4F Apparel Collection</h1>
+            <p>Wear the Future of Global Connection</p>
+        </div>
+
+        <div class="collection-banner">
+            <h2>Limited Edition Space Collection</h2>
+            <p>Inspired by innovation and designed for the future. Each piece tells a story of global connection and technological advancement.</p>
+        </div>
+
+        <div class="category-filters">
+            <button class="category-filter active">All</button>
+            <button class="category-filter">T-Shirts</button>
+            <button class="category-filter">Hoodies</button>
+            <button class="category-filter">Accessories</button>
+            <button class="category-filter">Limited Edition</button>
+        </div>
+
+        <div class="products-grid">
+            <!-- T-Shirts -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/cg4f-tshirt-cosmic.jpg" alt="CG4F Cosmic T-Shirt">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">CG4F Cosmic T-Shirt</h3>
+                    <p class="product-description">Premium cotton t-shirt with our signature cosmic design. Features the CG4F logo with constellation pattern.</p>
+                    <div class="product-price">$29.99</div>
+                    <div class="product-actions">
+                        <select class="size-selector">
+                            <option value="">Select Size</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                        </select>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hoodie -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/cg4f-hoodie-tech.jpg" alt="CG4F Tech Hoodie">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">CG4F Tech Hoodie</h3>
+                    <p class="product-description">Premium tech hoodie with embedded smart features. Reflective CG4F branding and modern cut.</p>
+                    <div class="product-price">$59.99</div>
+                    <div class="product-actions">
+                        <select class="size-selector">
+                            <option value="">Select Size</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                        </select>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cap -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/cg4f-cap-future.jpg" alt="CG4F Future Cap">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">CG4F Future Cap</h3>
+                    <p class="product-description">Adjustable cap with holographic CG4F logo. Perfect for any casual or tech-forward outfit.</p>
+                    <div class="product-price">$24.99</div>
+                    <div class="product-actions">
+                        <select class="size-selector">
+                            <option value="">Select Size</option>
+                            <option value="S/M">S/M</option>
+                            <option value="L/XL">L/XL</option>
+                        </select>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Limited Edition -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/cg4f-jacket-quantum.jpg" alt="CG4F Quantum Jacket">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">CG4F Quantum Jacket</h3>
+                    <p class="product-description">Limited edition jacket with smart fabric technology. Features animated LED CG4F branding.</p>
+                    <div class="product-price">$149.99</div>
+                    <div class="product-actions">
+                        <select class="size-selector">
+                            <option value="">Select Size</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                        </select>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/navigation.js"></script>
+    <script src="js/ai-services.js"></script>
+    <script>
+        // Create stars background
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            const numberOfStars = 200;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.setProperty('--duration', `${Math.random() * 3 + 1}s`);
+                starsContainer.appendChild(star);
+            }
+        }
+
+        createStars();
+
+        // Handle category filters
+        document.querySelectorAll('.category-filter').forEach(filter => {
+            filter.addEventListener('click', () => {
+                document.querySelectorAll('.category-filter').forEach(f => f.classList.remove('active'));
+                filter.classList.add('active');
+                // Add filtering logic here
+            });
+        });
+
+        // Handle add to cart
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                const card = button.closest('.product-card');
+                const name = card.querySelector('.product-name').textContent;
+                const size = card.querySelector('.size-selector').value;
+                if (!size) {
+                    alert('Please select a size');
+                    return;
+                }
+                alert(`Added ${name} (${size}) to cart`);
+            });
+        });
+
+        // Example: Analyze product images when they load
+        document.querySelectorAll('.product-image').forEach(async (img) => {
+            const analysis = await VisionAIService.analyzeImage(img.src);
+            if (analysis && analysis.labels) {
+                // Add tags to product
+                const tags = analysis.labels
+                    .filter(label => label.score > 0.8)
+                    .map(label => label.description);
+                // Add tags to product metadata
+                img.closest('.product-card').setAttribute('data-tags', tags.join(','));
+            }
+        });
+
+        // Example: Get product recommendations
+        async function showRecommendations(productId) {
+            const userId = getCurrentUserId(); // Implement this function
+            const recommendations = await RecommendationService.getRecommendations(userId, productId);
+            if (recommendations) {
+                // Update UI with recommended products
+                updateRecommendedProducts(recommendations); // Implement this function
+            }
+        }
+
+        // Example: Translate product descriptions
+        async function translateDescription(element, targetLang) {
+            const originalText = element.textContent;
+            const translation = await TranslationService.translateText(originalText, targetLang);
+            if (translation && translation.translatedText) {
+                element.textContent = translation.translatedText;
+            }
+        }
+    </script>
+</body>
+</html>

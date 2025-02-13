@@ -1,0 +1,62 @@
+metrics:
+  - name: "virtual_tryon_sessions"
+    type: DELTA
+    metricDescriptor:
+      type: "custom.googleapis.com/fashion/virtual_tryon_sessions"
+      metricKind: DELTA
+      valueType: INT64
+      description: "Number of virtual try-on sessions"
+      labels:
+        - key: device_type
+          valueType: STRING
+          description: "Type of device used (mobile/desktop)"
+        - key: browser
+          valueType: STRING
+          description: "Browser used"
+
+  - name: "virtual_tryon_success_rate"
+    type: GAUGE
+    metricDescriptor:
+      type: "custom.googleapis.com/fashion/virtual_tryon_success_rate"
+      metricKind: GAUGE
+      valueType: DOUBLE
+      description: "Success rate of virtual try-on attempts"
+
+  - name: "holographic_view_sessions"
+    type: DELTA
+    metricDescriptor:
+      type: "custom.googleapis.com/fashion/holographic_sessions"
+      metricKind: DELTA
+      valueType: INT64
+      description: "Number of holographic view sessions"
+
+  - name: "user_engagement_time"
+    type: DELTA
+    metricDescriptor:
+      type: "custom.googleapis.com/fashion/engagement_time"
+      metricKind: DELTA
+      valueType: INT64
+      description: "Time spent using interactive features"
+
+alerts:
+  - name: "High Virtual Try-on Failure Rate"
+    filter: >
+      metric.type="custom.googleapis.com/fashion/virtual_tryon_success_rate"
+      resource.type="global"
+    condition:
+      threshold: 0.8
+      comparison: COMPARISON_LT
+      duration: 300s
+    notification:
+      email: "johnallens80sbaby@gmail.com"
+
+  - name: "Low User Engagement"
+    filter: >
+      metric.type="custom.googleapis.com/fashion/engagement_time"
+      resource.type="global"
+    condition:
+      threshold: 60
+      comparison: COMPARISON_LT
+      duration: 3600s
+    notification:
+      email: "johnallens80sbaby@gmail.com"

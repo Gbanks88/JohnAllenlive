@@ -1,0 +1,14 @@
+{
+  "allContacts": {
+    "email": "admin@connecting-global.com",
+    "phoneNumber": "+1.8005550123",
+    "postalAddress": {
+      "regionCode": "US",
+      "postalCode": "94043",
+      "administrativeArea": "CA",
+      "locality": "Mountain View",
+      "addressLines": ["1600 Amphitheatre Parkway"],
+      "recipients": ["Admin"]
+    }
+  }
+}

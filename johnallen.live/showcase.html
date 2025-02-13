@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Allen's - Luxury Fashion & Accessories</title>
+    <link rel="stylesheet" href="css/showcase.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="logo-container">
+        <h1 class="logo">John Allen's</h1>
+        <div class="logo-subtitle">LUXURY FASHION & ACCESSORIES</div>
+    </div>
+
+    <nav class="category-nav">
+        <a href="#" class="category-link">New Arrivals</a>
+        <a href="#" class="category-link">Apparel</a>
+        <a href="#" class="category-link">Accessories</a>
+        <a href="#" class="category-link">Collections</a>
+        <a href="#" class="category-link">Virtual Try-On</a>
+    </nav>
+
+    <div class="featured-banner">
+        <h2 class="featured-title">Spring Collection 2025</h2>
+        <p class="featured-subtitle">Experience luxury reimagined through our innovative holographic displays and virtual try-on technology</p>
+    </div>
+
+    <div class="showcase-grid">
+        <!-- Luxury Apparel Items -->
+        <div class="showcase-item">
+            <img src="images/showcase/silk-blazer.jpg" alt="Silk Blazer" class="showcase-image">
+            <div class="showcase-overlay">
+                <h3 class="showcase-title">Italian Silk Blazer</h3>
+                <div class="showcase-price">$1,295</div>
+            </div>
+        </div>
+
+        <div class="showcase-item">
+            <img src="images/showcase/cashmere-sweater.jpg" alt="Cashmere Sweater" class="showcase-image">
+            <div class="showcase-overlay">
+                <h3 class="showcase-title">Cashmere V-Neck</h3>
+                <div class="showcase-price">$895</div>
+            </div>
+        </div>
+
+        <!-- Accessories -->
+        <div class="showcase-item">
+            <img src="images/showcase/leather-bag.jpg" alt="Leather Bag" class="showcase-image">
+            <div class="showcase-overlay">
+                <h3 class="showcase-title">Handcrafted Leather Tote</h3>
+                <div class="showcase-price">$1,495</div>
+            </div>
+        </div>
+
+        <div class="showcase-item">
+            <img src="images/showcase/watch.jpg" alt="Luxury Watch" class="showcase-image">
+            <div class="showcase-overlay">
+                <h3 class="showcase-title">Chronograph Watch</h3>
+                <div class="showcase-price">$2,795</div>
+            </div>
+        </div>
+
+        <!-- More Items -->
+        <div class="showcase-item">
+            <img src="images/showcase/silk-scarf.jpg" alt="Silk Scarf" class="showcase-image">
+            <div class="showcase-overlay">
+                <h3 class="showcase-title">Printed Silk Scarf</h3>
+                <div class="showcase-price">$395</div>
+            </div>
+        </div>
+
+        <div class="showcase-item">
+            <img src="images/showcase/shoes.jpg" alt="Leather Shoes" class="showcase-image">
+            <div class="showcase-overlay">
+                <h3 class="showcase-title">Italian Leather Oxfords</h3>
+                <div class="showcase-price">$895</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth scrolling and animations
+        document.querySelectorAll('.showcase-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'translateY(-10px)';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>

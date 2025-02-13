@@ -1,0 +1,52 @@
+displayName: "John Allen's Fashion Site Monitoring"
+monitoredResource:
+  type: uptime_url
+  labels:
+    project_id: cool-ascent-450601-d1
+    host: johnallens.live
+
+httpCheck:
+  useSsl: true
+  validateSsl: true
+  port: 443
+  requestMethod: GET
+  headers:
+    User-Agent: GoogleStackdriverMonitoring-UptimeChecks
+
+contentMatchers:
+  - matcher: CONTAINS_STRING
+    content: "John Allen's"
+
+period: 300s  # Check every 5 minutes
+timeout: 10s
+
+alertPolicies:
+  - displayName: "High Latency Alert"
+    conditions:
+      - displayName: "Latency > 2s"
+        duration: 300s
+        metric: latency
+        comparison: COMPARISON_GT
+        thresholdValue: 2000  # 2 seconds
+        trigger:
+          count: 1
+
+  - displayName: "Error Rate Alert"
+    conditions:
+      - displayName: "Error Rate > 5%"
+        duration: 300s
+        metric: error_rate
+        comparison: COMPARISON_GT
+        thresholdValue: 0.05
+        trigger:
+          count: 1
+
+  - displayName: "SSL Certificate Expiration"
+    conditions:
+      - displayName: "Certificate expires in < 30 days"
+        duration: 86400s  # 1 day
+        metric: ssl_expiry
+        comparison: COMPARISON_LT
+        thresholdValue: 30  # days
+        trigger:
+          count: 1

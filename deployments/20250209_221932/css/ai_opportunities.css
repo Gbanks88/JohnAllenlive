@@ -1,0 +1,691 @@
+/* Sci-fi theme variables */
+:root {
+    --primary-color: #00f7ff;
+    --secondary-color: #7b2fff;
+    --accent-color: #ff124f;
+    --success-color: #00ff9f;
+    --warning-color: #ff9e00;
+    --error-color: #ff2d55;
+    --background-color: #0a0a1f;
+    --card-background: rgba(16, 16, 45, 0.8);
+    --text-color: #e0e0ff;
+    --text-light: #8080aa;
+    --border-color: rgba(0, 247, 255, 0.2);
+    --hover-color: rgba(0, 247, 255, 0.1);
+    --shadow-color: rgba(0, 247, 255, 0.2);
+    
+    /* Sci-fi gradients */
+    --neon-gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    --space-gradient: linear-gradient(to bottom, #0a0a1f, #1a1a3f);
+    --hologram-gradient: linear-gradient(45deg, rgba(0, 247, 255, 0.1), rgba(123, 47, 255, 0.1));
+    
+    /* Animations */
+    --transition-speed: 0.3s;
+    --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+    --glow-animation: glow 2s infinite alternate;
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+}
+
+/* Space theme background */
+body {
+    background: var(--space-gradient);
+    background-attachment: fixed;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Star field animation */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(1px 1px at 25px 25px, white, rgba(255, 255, 255, 0)),
+        radial-gradient(1px 1px at 50px 50px, white, rgba(255, 255, 255, 0)),
+        radial-gradient(2px 2px at 125px 125px, white, rgba(255, 255, 255, 0));
+    background-size: 200px 200px;
+    animation: stars 60s linear infinite;
+    opacity: 0.5;
+    z-index: 0;
+}
+
+@keyframes stars {
+    from { transform: translateY(0); }
+    to { transform: translateY(-200px); }
+}
+
+/* Holographic cards */
+.opportunity-card {
+    background: var(--card-background);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: var(--spacing-xl);
+    box-shadow: 0 0 20px var(--shadow-color);
+    transition: all var(--transition-speed) var(--transition-timing);
+    position: relative;
+    overflow: hidden;
+}
+
+.opportunity-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--hologram-gradient);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.opportunity-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 0 30px var(--shadow-color);
+}
+
+.opportunity-card:hover::before {
+    opacity: 1;
+}
+
+/* Neon elements */
+.card-header h3 {
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color);
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.metric i {
+    color: var(--primary-color);
+    text-shadow: 0 0 5px var(--primary-color);
+    animation: var(--glow-animation);
+}
+
+@keyframes glow {
+    from { opacity: 0.8; }
+    to { opacity: 1; }
+}
+
+/* Futuristic buttons */
+.button {
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 0.5rem 1.5rem;
+    border-radius: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: var(--neon-gradient);
+    transition: width 0.3s ease;
+    z-index: -1;
+}
+
+.button:hover::before {
+    width: 100%;
+}
+
+.button:hover {
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+/* Sci-fi loader */
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 2px solid transparent;
+    border-top-color: var(--primary-color);
+    border-right-color: var(--secondary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Holographic modal */
+.details-modal {
+    background: var(--card-background);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    box-shadow: 0 0 30px var(--shadow-color);
+}
+
+/* Market trends with sci-fi style */
+.market-trends-banner {
+    background: linear-gradient(135deg, rgba(10, 10, 31, 0.8), rgba(26, 26, 63, 0.8));
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: var(--spacing-xl);
+    position: relative;
+    overflow: hidden;
+}
+
+.market-trends-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 0%,
+        rgba(0, 247, 255, 0.1) 50%,
+        transparent 100%
+    );
+    animation: hologram-sweep 3s linear infinite;
+}
+
+@keyframes hologram-sweep {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Skill tags with neon effect */
+.skill-tag {
+    background: rgba(0, 247, 255, 0.1);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 1rem;
+    font-size: var(--font-size-xs);
+    text-shadow: 0 0 5px var(--primary-color);
+}
+
+/* Difficulty badges with sci-fi style */
+.difficulty-badge {
+    background: var(--hologram-gradient);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    text-shadow: 0 0 5px var(--primary-color);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+    background: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .opportunity-card {
+        margin: var(--spacing-sm);
+    }
+    
+    .market-trends-banner {
+        margin: var(--spacing-sm);
+    }
+}
+
+/* Print styles */
+@media print {
+    body::before {
+        display: none;
+    }
+    
+    .opportunity-card {
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+}
+
+/* High contrast mode */
+[data-theme="high-contrast"] {
+    --primary-color: #ffffff;
+    --secondary-color: #ffffff;
+    --text-color: #ffffff;
+    --background-color: #000000;
+    --card-background: #000000;
+    --border-color: #ffffff;
+}
+
+/* Enhanced theme variables */
+:root {
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.25rem;
+    --font-size-xl: 1.5rem;
+    --font-size-xxl: 2rem;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+    --primary-color: #66b3ff;
+    --secondary-color: #3385ff;
+    --background-color: #1a1a1a;
+    --card-background: #2d2d2d;
+    --text-color: #ffffff;
+    --text-light: #cccccc;
+    --border-color: #404040;
+    --hover-color: #333333;
+}
+
+/* Market trends banner */
+.market-trends-banner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    padding: var(--spacing-xl);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-radius: 1rem;
+    margin-bottom: var(--spacing-xl);
+}
+
+.trend-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.trend-value {
+    font-size: var(--font-size-xl);
+    font-weight: bold;
+    margin: var(--spacing-sm) 0;
+}
+
+.trend-label {
+    font-size: var(--font-size-sm);
+    opacity: 0.9;
+}
+
+/* Enhanced card styles */
+.opportunity-card {
+    background: var(--card-background);
+    border-radius: 1rem;
+    padding: var(--spacing-xl);
+    box-shadow: 0 4px 6px var(--shadow-color);
+    transition: all var(--transition-speed) var(--transition-timing);
+    position: relative;
+    overflow: hidden;
+}
+
+.opportunity-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px var(--shadow-color);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.difficulty-badge {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 1rem;
+    font-size: var(--font-size-xs);
+    font-weight: bold;
+}
+
+.difficulty-badge.level-1 { background: #e8f5e9; color: #2e7d32; }
+.difficulty-badge.level-2 { background: #f1f8e9; color: #558b2f; }
+.difficulty-badge.level-3 { background: #fff3e0; color: #f57c00; }
+.difficulty-badge.level-4 { background: #fbe9e7; color: #d84315; }
+.difficulty-badge.level-5 { background: #ffebee; color: #c62828; }
+
+.key-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    margin: var(--spacing-lg) 0;
+    padding: var(--spacing-md);
+    background: var(--hover-color);
+    border-radius: 0.5rem;
+}
+
+.metric {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.metric i {
+    font-size: var(--font-size-xl);
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-xs);
+}
+
+.skills-required {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-lg);
+}
+
+.skill-tag {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background: var(--hover-color);
+    border-radius: 1rem;
+    font-size: var(--font-size-xs);
+    color: var(--text-color);
+}
+
+/* Modal enhancements */
+.details-modal {
+    background: var(--background-color);
+    border-radius: 1rem;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.details-header {
+    padding: var(--spacing-xl);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.details-body {
+    padding: var(--spacing-xl);
+}
+
+.details-footer {
+    padding: var(--spacing-xl);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+/* Animation classes */
+.animate-in {
+    animation: slideUp 0.5s var(--transition-timing) forwards;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .market-trends-banner {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .key-metrics {
+        grid-template-columns: 1fr;
+    }
+    
+    .details-footer {
+        flex-direction: column;
+    }
+}
+
+/* Print styles */
+@media print {
+    .opportunity-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    
+    .market-trends-banner {
+        background: none;
+        color: black;
+        border: 1px solid var(--border-color);
+    }
+}
+
+/* Accessibility improvements */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline-offset: 2px;
+}
+
+*:focus {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+*:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Base container styles */
+.ai-opportunities-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-xl);
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Header styles with improved typography */
+.opportunities-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.opportunities-header h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.opportunities-header p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--text-color);
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Grid layout with improved responsiveness */
+.opportunities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Icon animations */
+.opportunity-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    text-align: center;
+    transition: transform var(--transition-speed) ease;
+}
+
+.opportunity-card:hover .opportunity-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Typography improvements */
+.opportunity-card h3 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+/* Preview section with better spacing */
+.opportunity-preview {
+    margin-bottom: 1.5rem;
+}
+
+.sub-opportunity {
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: calc(var(--border-radius) / 2);
+    background: var(--hover-color);
+    transition: all var(--transition-speed) ease;
+}
+
+.sub-opportunity:hover {
+    transform: translateX(5px);
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Button styles with improved accessibility */
+.learn-more-btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: calc(var(--border-radius) / 2);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.learn-more-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.learn-more-btn:hover::after {
+    width: 300%;
+    height: 300%;
+}
+
+/* Modal styles with improved animations */
+.opportunity-details {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity var(--transition-speed) ease;
+}
+
+.opportunity-details.active {
+    opacity: 1;
+}
+
+/* Scrollbar styling */
+.details-modal::-webkit-scrollbar {
+    width: 8px;
+}
+
+.details-modal::-webkit-scrollbar-track {
+    background: var(--hover-color);
+    border-radius: 4px;
+}
+
+.details-modal::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+/* Loading states */
+.loading {
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: loading 1.5s infinite;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes loading {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

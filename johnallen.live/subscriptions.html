@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fair Pricing Model - Connecting Global</title>
+    <link rel="stylesheet" href="css/space-theme.css">
+    <link rel="stylesheet" href="css/transitions.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .pricing-hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            margin: 2rem auto;
+            max-width: 1200px;
+        }
+
+        .pricing-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            border: 1px solid var(--primary);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin: 2rem auto;
+            max-width: 600px;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .pricing-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px var(--primary);
+        }
+
+        .price {
+            font-size: 4rem;
+            font-weight: 700;
+            margin: 1rem 0;
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+        }
+
+        .price-description {
+            font-size: 1.2rem;
+            color: var(--text);
+            margin: 1.5rem 0;
+            line-height: 1.6;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+
+        .feature-list li {
+            margin: 1rem 0;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .feature-list i {
+            color: var(--primary);
+        }
+
+        .earn-back {
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid #4CAF50;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .earn-back h3 {
+            color: #4CAF50;
+            margin-bottom: 1rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            background: var(--primary);
+            color: var(--background);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-top: 2rem;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        .faq-section {
+            margin: 4rem auto;
+            max-width: 800px;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid var(--accent);
+        }
+
+        .faq-item h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Star Field Background -->
+    <div class="star-field" id="starField"></div>
+    
+    <!-- Holographic Grid -->
+    <div class="hologram-grid"></div>
+
+    <!-- Header -->
+    <header class="space-header">
+        <div class="container">
+            <nav class="nav-container">
+                <a href="transition.html?to=index.html" class="logo">
+                    <i class="fas fa-globe nav-logo-icon"></i>
+                    Connecting Global
+                </a>
+                <div class="nav-links">
+                    <a href="transition.html?to=about.html" class="nav-btn"><i class="fas fa-info-circle"></i> About</a>
+                    <a href="transition.html?to=fair-innovation.html" class="nav-btn"><i class="fas fa-lightbulb"></i> Fair Innovation</a>
+                    <a href="transition.html?to=ai-tools.html" class="nav-btn"><i class="fas fa-robot"></i> AI Tools</a>
+                    <a href="transition.html?to=learn-ai.html" class="nav-btn"><i class="fas fa-graduation-cap"></i> Learn AI</a>
+                    <a href="transition.html?to=make-money.html" class="nav-btn"><i class="fas fa-dollar-sign"></i> Make Money</a>
+                    <a href="transition.html?to=patent.html" class="nav-btn"><i class="fas fa-certificate"></i> Patents</a>
+                    <a href="transition.html?to=apparel.html" class="nav-btn"><i class="fas fa-tshirt"></i> Apparel</a>
+                    <a href="transition.html?to=subscriptions.html" class="nav-btn active"><i class="fas fa-tags"></i> Pricing</a>
+                    <a href="transition.html?to=analytics.html" class="nav-btn"><i class="fas fa-chart-line"></i> Analytics</a>
+                    <a href="#contact" class="btn cta-btn"><i class="fas fa-envelope"></i> Contact Us</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="pricing-hero">
+                <h1>Fair Learning Model</h1>
+                <p>Invest in your future and earn back every dollar you spend on learning</p>
+            </section>
+
+            <!-- Pricing Card -->
+            <section class="pricing-container">
+                <div class="pricing-card">
+                    <h2>AI Academy Access</h2>
+                    <div class="price">$100</div>
+                    <p class="price-description">One-time investment in your future</p>
+                    
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> Full access to all courses</li>
+                        <li><i class="fas fa-check-circle"></i> Hands-on projects</li>
+                        <li><i class="fas fa-check-circle"></i> Expert mentorship</li>
+                        <li><i class="fas fa-check-circle"></i> Global community access</li>
+                        <li><i class="fas fa-check-circle"></i> Certificate upon completion</li>
+                    </ul>
+
+                    <div class="earn-back">
+                        <h3><i class="fas fa-undo"></i> Earn Back Program</h3>
+                        <p>Get paid $1 for every hour you dedicate to learning. Complete the program to earn back your entire investment!</p>
+                    </div>
+
+                    <a href="#enroll" class="cta-btn">Enroll Now</a>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                
+                <div class="faq-item">
+                    <h3>How does the earn-back program work?</h3>
+                    <p>For every hour you spend learning on our platform, we credit $1 back to your account. This means you can earn back your entire $100 investment by dedicating time to your education.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>When do I receive my earned credits?</h3>
+                    <p>Credits are calculated and distributed on a weekly basis. You can track your learning hours and earnings in real-time through your dashboard.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Is there a time limit to earn back my investment?</h3>
+                    <p>No, there's no time limit. Learn at your own pace while earning back your investment. Your access to the platform remains active until you complete the program.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>What happens after I earn back my investment?</h3>
+                    <p>You'll continue to have full access to the platform and can keep learning. Your achievement will also unlock additional opportunities within our global network.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="transition.html?to=about.html">About Us</a></li>
+                        <li><a href="transition.html?to=fair-innovation.html">Fair Innovation</a></li>
+                        <li><a href="transition.html?to=patent.html">Patents</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="transition.html?to=ai-tools.html">AI Tools</a></li>
+                        <li><a href="transition.html?to=learn-ai.html">Learn AI</a></li>
+                        <li><a href="transition.html?to=make-money.html">Make Money</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Shop & Analytics</h4>
+                    <ul class="footer-links">
+                        <li><a href="transition.html?to=apparel.html">Apparel</a></li>
+                        <li><a href="transition.html?to=subscriptions.html">Pricing</a></li>
+                        <li><a href="transition.html?to=analytics.html">Analytics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul class="footer-links social-links">
+                        <li><a href="https://twitter.com/ConnectingGlob4" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="https://www.linkedin.com/company/connecting-global-4-future" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                        <li><a href="mailto:info@connecting-global.com"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Connecting Global 4 Future. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/transitions.js"></script>
+    <script src="js/animations.js"></script>
+</body>
+</html>

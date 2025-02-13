@@ -1,0 +1,16 @@
+{
+  "defaultTtl": "3600s",
+  "maxTtl": "86400s",
+  "minTtl": "600s",
+  "cacheMode": "CACHE_ALL_STATIC",
+  "clientTtl": "3600s",
+  "negativeCaching": true,
+  "serveWhileStale": "86400s",
+  "cacheKeyPolicy": {
+    "includeProtocol": true,
+    "includeHost": true,
+    "includeQueryString": false,
+    "queryStringBlacklist": ["utm_*", "fbclid", "gclid"],
+    "includeHttpHeaders": ["Accept", "Accept-Language"]
+  }
+}

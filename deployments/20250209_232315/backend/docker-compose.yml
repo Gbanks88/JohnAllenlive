@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+
+  redis:
+    image: redis:7.0
+    ports:
+      - "6379:6379"
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - elasticsearch
+      - redis
+    environment:
+      - ELASTICSEARCH_HOST=elasticsearch
+      - REDIS_HOST=redis
+      - PYTHONUNBUFFERED=1
+
+  celery_worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: celery -A crawler worker --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - elasticsearch
+    environment:
+      - ELASTICSEARCH_HOST=elasticsearch
+      - REDIS_HOST=redis
+      - PYTHONUNBUFFERED=1
+
+volumes:
+  esdata:

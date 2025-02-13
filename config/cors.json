@@ -1,0 +1,8 @@
+[
+    {
+      "origin": ["https://johnallens.live", "https://www.johnallens.live"],
+      "method": ["GET", "HEAD", "OPTIONS"],
+      "responseHeader": ["Content-Type", "Access-Control-Allow-Origin"],
+      "maxAgeSeconds": 3600
+    }
+]

@@ -1,0 +1,24 @@
+{
+  "name": "cg4f-site",
+  "version": "1.0.0",
+  "description": "CG4F - Connecting Globally for Future",
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 0",
+    "build": "npm run minify",
+    "optimize-images": "mkdir -p dist/images && (test -d images && test \"$(ls -A images)\" && sharp-cli --input images/* --output dist/images || echo 'No images to optimize')",
+    "minify": "npm run minify-css && npm run minify-js",
+    "minify-css": "mkdir -p dist/css && postcss css/*.css --use cssnano --dir dist/css",
+    "minify-js": "mkdir -p dist/js && terser js/*.js -o dist/js/bundle.min.js",
+    "serve": "http-server . -p 8080"
+  },
+  "dependencies": {
+    "http-server": "^14.1.1"
+  },
+  "devDependencies": {
+    "cssnano": "^6.1.2",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
+    "sharp-cli": "^5.1.0",
+    "terser": "^5.38.1"
+  }
+}

@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: watson-credentials
+type: Opaque
+data:
+  # These will be populated by the setup script
+  ASSISTANT_API_KEY: ""
+  ASSISTANT_URL: ""
+  SPEECH_TO_TEXT_API_KEY: ""
+  SPEECH_TO_TEXT_URL: ""
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: watson-integration
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: watson-integration
+  template:
+    metadata:
+      labels:
+        app: watson-integration
+    spec:
+      containers:
+      - name: watson-integration
+        image: watson-integration:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ASSISTANT_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: watson-credentials
+              key: ASSISTANT_API_KEY
+        - name: ASSISTANT_URL
+          valueFrom:
+            secretKeyRef:
+              name: watson-credentials
+              key: ASSISTANT_URL
+        - name: SPEECH_TO_TEXT_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: watson-credentials
+              key: SPEECH_TO_TEXT_API_KEY
+        - name: SPEECH_TO_TEXT_URL
+          valueFrom:
+            secretKeyRef:
+              name: watson-credentials
+              key: SPEECH_TO_TEXT_URL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: watson-integration
+spec:
+  selector:
+    app: watson-integration
+  ports:
+  - port: 80
+    targetPort: 8080
+  type: LoadBalancer

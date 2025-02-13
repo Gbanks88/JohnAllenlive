@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Allen's - Virtual Try-On</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix"></script>
+</head>
+<body>
+    <header>
+        <!-- Navigation code here -->
+    </header>
+
+    <main>
+        <section class="tryon-hero">
+            <div class="container">
+                <h1>Virtual Try-On Experience</h1>
+                <p>See how our clothes look on you in real-time using your camera</p>
+            </div>
+        </section>
+
+        <section class="tryon-interface">
+            <div class="container">
+                <div class="tryon-grid">
+                    <div class="camera-view">
+                        <video id="video" autoplay playsinline></video>
+                        <canvas id="output"></canvas>
+                    </div>
+                    
+                    <div class="clothing-selection">
+                        <h3>Select an Item to Try On</h3>
+                        <div class="clothing-grid">
+                            <!-- Clothing items will be dynamically loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button id="startCamera" class="btn primary">Start Camera</button>
+                    <button id="takePhoto" class="btn secondary" disabled>Take Photo</button>
+                    <button id="share" class="btn secondary" disabled>Share</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="size-recommendation">
+            <div class="container">
+                <h2>Smart Size Recommendations</h2>
+                <p>Our AI analyzes your measurements to suggest the perfect size</p>
+                <div id="sizeResult"></div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let video;
+        let canvas;
+        let ctx;
+        let model;
+        let selectedClothing = null;
+
+        async function setupCamera() {
+            video = document.getElementById('video');
+            canvas = document.getElementById('output');
+            ctx = canvas.getContext('2d');
+
+            // Set up camera
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: {
+                    width: 640,
+                    height: 480
+                },
+                audio: false
+            });
+            video.srcObject = stream;
+
+            return new Promise((resolve) => {
+                video.onloadedmetadata = () => {
+                    resolve(video);
+                };
+            });
+        }
+
+        async function loadBodyPix() {
+            model = await bodyPix.load({
+                architecture: 'MobileNetV1',
+                outputStride: 16,
+                multiplier: 0.75,
+                quantBytes: 2
+            });
+        }
+
+        async function detectPose() {
+            const segmentation = await model.segmentPerson(video);
+            
+            // Draw original video frame
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            
+            // Apply clothing overlay if selected
+            if (selectedClothing) {
+                applyClothing(segmentation);
+            }
+
+            requestAnimationFrame(detectPose);
+        }
+
+        function applyClothing(segmentation) {
+            // Apply selected clothing to the segmented body parts
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+            
+            for (let i = 0; i < segmentation.data.length; i++) {
+                if (segmentation.data[i] === 1) { // If pixel is part of person
+                    const pixelIndex = i * 4;
+                    // Apply clothing texture/color
+                    data[pixelIndex] = selectedClothing.color.r;
+                    data[pixelIndex + 1] = selectedClothing.color.g;
+                    data[pixelIndex + 2] = selectedClothing.color.b;
+                    data[pixelIndex + 3] = 255;
+                }
+            }
+            
+            ctx.putImageData(imageData, 0, 0);
+        }
+
+        function initializeClothingGrid() {
+            const clothingItems = [
+                { id: 1, name: 'Classic Suit', color: { r: 50, g: 50, b: 50 } },
+                { id: 2, name: 'White Shirt', color: { r: 255, g: 255, b: 255 } },
+                { id: 3, name: 'Blue Blazer', color: { r: 0, g: 0, b: 150 } }
+            ];
+
+            const grid = document.querySelector('.clothing-grid');
+            clothingItems.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'clothing-item';
+                div.innerHTML = `
+                    <div class="clothing-preview" style="background-color: rgb(${item.color.r}, ${item.color.g}, ${item.color.b})"></div>
+                    <p>${item.name}</p>
+                `;
+                div.onclick = () => {
+                    selectedClothing = item;
+                    document.querySelectorAll('.clothing-item').forEach(el => el.classList.remove('selected'));
+                    div.classList.add('selected');
+                };
+                grid.appendChild(div);
+            });
+        }
+
+        async function init() {
+            await setupCamera();
+            await loadBodyPix();
+            initializeClothingGrid();
+            
+            document.getElementById('startCamera').onclick = async () => {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                detectPose();
+                document.getElementById('takePhoto').disabled = false;
+            };
+
+            document.getElementById('takePhoto').onclick = () => {
+                const photo = canvas.toDataURL('image/png');
+                // Handle photo saving/sharing
+                document.getElementById('share').disabled = false;
+            };
+
+            document.getElementById('share').onclick = () => {
+                // Implement sharing functionality
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'My Virtual Try-On',
+                        text: 'Check out how I look in John Allen\'s clothing!',
+                        url: window.location.href
+                    });
+                }
+            };
+        }
+
+        // Start the application
+        init().catch(err => {
+            console.error(err);
+            alert('Error initializing virtual try-on. Please make sure your camera is enabled and try again.');
+        });
+    </script>
+</body>
+</html>

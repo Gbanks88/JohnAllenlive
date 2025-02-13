@@ -1,0 +1,72 @@
+{
+  "displayName": "John Allen's Fashion Dashboard",
+  "gridLayout": {
+    "columns": "2",
+    "widgets": [
+      {
+        "title": "Website Traffic",
+        "xyChart": {
+          "dataSets": [{
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "filter": "metric.type=\"loadbalancing.googleapis.com/https/request_count\"",
+                "aggregation": {
+                  "alignmentPeriod": "60s",
+                  "perSeriesAligner": "ALIGN_RATE"
+                }
+              }
+            }
+          }]
+        }
+      },
+      {
+        "title": "Response Latency",
+        "xyChart": {
+          "dataSets": [{
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "filter": "metric.type=\"loadbalancing.googleapis.com/https/backend_latencies\"",
+                "aggregation": {
+                  "alignmentPeriod": "60s",
+                  "perSeriesAligner": "ALIGN_PERCENTILE_95"
+                }
+              }
+            }
+          }]
+        }
+      },
+      {
+        "title": "CDN Cache Hit Ratio",
+        "xyChart": {
+          "dataSets": [{
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "filter": "metric.type=\"loadbalancing.googleapis.com/https/cache/cache_hit_count\"",
+                "aggregation": {
+                  "alignmentPeriod": "60s",
+                  "perSeriesAligner": "ALIGN_RATE"
+                }
+              }
+            }
+          }]
+        }
+      },
+      {
+        "title": "Error Rate",
+        "xyChart": {
+          "dataSets": [{
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "filter": "metric.type=\"loadbalancing.googleapis.com/https/request_count\" resource.type=\"https_lb_rule\" metric.label.response_code_class=\"500\"",
+                "aggregation": {
+                  "alignmentPeriod": "60s",
+                  "perSeriesAligner": "ALIGN_RATE"
+                }
+              }
+            }
+          }]
+        }
+      }
+    ]
+  }
+}

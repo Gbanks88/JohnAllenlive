@@ -1,0 +1,42 @@
+environment: staging
+bucket: cool-ascent-450601-d1-fashion-staging
+
+load_balancer:
+  name: johnallens-fashion-staging-lb
+  ssl: true
+  domain: staging.johnallens.live
+
+security:
+  allowed_ips:
+    - ${OFFICE_IP}
+    - ${DEV_HOME_IP}
+  basic_auth: true
+  username: ${STAGING_USER}
+  password: ${STAGING_PASSWORD}
+
+monitoring:
+  error_reporting: true
+  performance_monitoring: true
+  alert_threshold:
+    error_rate: 0.1  # 10%
+    latency: 1000    # 1 second
+    memory_usage: 0.8 # 80%
+
+deployment:
+  strategy: blue_green
+  rollback_enabled: true
+  auto_scaling:
+    min_instances: 1
+    max_instances: 2
+    cpu_utilization: 0.7
+
+testing:
+  automated_tests: true
+  load_testing: true
+  security_scan: true
+  accessibility_check: true
+
+backup:
+  frequency: daily
+  retention_days: 7
+  type: incremental

@@ -1,0 +1,19 @@
+description: "Deploy website with AI integration"
+filename: cloudbuild.yaml
+github:
+  owner: "Gbanks88"
+  name: "johnallen-live"
+  push:
+    branch: "^main$"
+name: "johnallen-live-deploy"
+triggerTemplate:
+  projectId: "test1-157723"
+  repoName: "johnallen-live"
+  branchName: "^main$"
+substitutions:
+  _REGION: "us-central1"
+  _DOMAIN: "johnallen.live"
+tags:
+  - deploy
+  - website
+  - ai

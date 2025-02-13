@@ -1,0 +1,47 @@
+- displayName: "High Latency Alert"
+  conditions:
+    - displayName: "Latency > 2s"
+      conditionThreshold:
+        filter: "metric.type=\"loadbalancing.googleapis.com/https/backend_latencies\" resource.type=\"https_lb_rule\""
+        aggregations:
+          - alignmentPeriod: 60s
+            crossSeriesReducer: REDUCE_PERCENTILE_95
+            perSeriesAligner: ALIGN_DELTA
+        comparison: COMPARISON_GT
+        duration: 300s
+        trigger:
+          count: 1
+        thresholdValue: 2000
+
+- displayName: "Error Rate Alert"
+  conditions:
+    - displayName: "Error Rate > 5%"
+      conditionThreshold:
+        filter: "metric.type=\"loadbalancing.googleapis.com/https/request_count\" resource.type=\"https_lb_rule\""
+        aggregations:
+          - alignmentPeriod: 60s
+            perSeriesAligner: ALIGN_RATE
+        comparison: COMPARISON_GT
+        duration: 300s
+        trigger:
+          count: 1
+        thresholdValue: 0.05
+
+- displayName: "SSL Certificate Expiration"
+  conditions:
+    - displayName: "Certificate expires in 30 days"
+      conditionThreshold:
+        filter: "metric.type=\"monitoring.googleapis.com/uptime_check/cert_validity\" resource.type=\"uptime_url\""
+        aggregations:
+          - alignmentPeriod: 60s
+            perSeriesAligner: ALIGN_MEAN
+        comparison: COMPARISON_LT
+        duration: 300s
+        trigger:
+          count: 1
+        thresholdValue: 30
+
+notificationChannels:
+  - type: email
+    labels:
+      email_address: "johnallens80sbaby@gmail.com"

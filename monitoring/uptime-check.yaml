@@ -1,0 +1,16 @@
+displayName: "johnallen-live-uptime"
+httpCheck:
+  path: "/"
+  port: 443
+  useSsl: true
+  validateSsl: true
+monitoredResource:
+  type: "uptime_url"
+  labels:
+    host: "johnallen.live"
+    project_id: "test1-157723"
+period: "60s"
+timeout: "10s"
+contentMatchers:
+- content: "Welcome"
+  matcher: CONTAINS_STRING

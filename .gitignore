@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+.venv/
+
+# Build output
+dist/
+build/
+*.min.css
+*.min.js
+
+# IDE and OS files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Credentials
+config/credentials.env
+*.key
+*.pem
+**/credentials.*
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!terraform.tfvars

@@ -1,0 +1,33 @@
+steps:
+# Test step
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['test']
+  dir: 'johnallen.live'
+
+# Build step
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['run', 'build']
+  dir: 'johnallen.live'
+
+# Deploy to staging
+- name: 'gcr.io/cloud-builders/gsutil'
+  args: ['-m', 'rsync', '-r', 'johnallen.live/', 'gs://cool-ascent-450601-d1-fashion-staging']
+  id: 'deploy-staging'
+
+# Security scan
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+    - 'beta'
+    - 'security'
+    - 'web-scanner'
+    - 'scan'
+    - 'gs://cool-ascent-450601-d1-fashion-staging'
+    - '--scan-type=fast'
+  id: 'security-scan'
+
+# Deploy to production
+- name: 'gcr.io/cloud-builders/gsutil'
+  args: ['-m', 'rsync', '-r', 'gs://cool-ascent-450601-d1-fashion-staging/', 'gs://cool-ascent-450601-d1-fashion']
+  id: 'deploy-production'
+
+timeout: '1800s'
